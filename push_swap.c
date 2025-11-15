@@ -46,15 +46,14 @@ int main(int argc, char **argv)
 	if (!(check_all_errors(argv)))
 		return error_print();
 	init_stack_a(argv, &head_a);
-	if (check_sorted(head_a, argv))
-		return 0;
-	if (str_len(argv) == 2 && !check_sorted(head_a, argv))
-		return 0;
-	if (str_len(argv) == 3 && !check_sorted(head_a, argv))
-		return 0;
-
-
-
-
+	if (!check_sorted(head_a, argv))
+	{
+		if (str_len(argv) == 2)
+			sa(&head_a);
+		else if (str_len(argv) == 3)
+			tiny_sort(&head_a);
+		else
+			push_swap(&head_a, &head_b);
+	}
 	return 0;
 }
