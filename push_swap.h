@@ -25,6 +25,8 @@ typedef struct l_list
 f_list	*ft_lstnew_ps(int content, int *temp_sorted, int size);
 void	ft_lstadd_back_ps(f_list ***lst, f_list *new);
 int error_print(void);
+int str_len(char **argv);
+int *bubble_sort(char **argv);
 int	is_valid(char **argv);
 int check_doublon(char **argv);
 int hay_overflow(char **argv);
