@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-char *error_print(void)
+int error_print(void)
 {
-	return (write(2, "error\n", 6), NULL);
+	return (write(2, "error\n", 6), 0);
 }
 
 int	is_valid(char **argv)
@@ -41,7 +41,7 @@ int check_doublon(char **argv)
 		j = i + 1;
 		while (argv[j])
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[i + j]))
+			if (ft_atol(argv[i]) == ft_atol(argv[i + j]))
 				return 1;
 			j++;
 		}
@@ -58,7 +58,7 @@ int hay_overflow(char **argv)
 	i = 0;
 	while (argv[i])
 	{
-		n = ft_atoi(argv[i]);
+		n = ft_atol(argv[i]);
 		if (n < INT_MIN || n > INT_MAX)
 			return 1;
 		i++;
@@ -67,7 +67,7 @@ int hay_overflow(char **argv)
 
 int check_all_errors(char **argv)
 {
-	if (!is_valid(argv) || check_doublon(argv) || hay_overflow(argv))
+	if (!is_valid(argv) || /*check_doublon(argv) ||*/ hay_overflow(argv))
 		return (0);
 	return 1;
 

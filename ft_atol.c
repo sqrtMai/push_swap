@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 static int	is_space(char c)
 {
@@ -20,7 +20,7 @@ static int	is_space(char c)
 	return (0);
 }
 
-int	ft_atoi(char *str)
+long long	ft_atol(char *str)
 {
 	int				i;
 	long long		result;
