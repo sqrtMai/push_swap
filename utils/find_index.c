@@ -1,4 +1,5 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
+
 
 int str_len(char **argv)
 {

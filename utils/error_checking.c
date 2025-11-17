@@ -1,4 +1,5 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
+
 
 int error_print(void)
 {
@@ -63,6 +64,7 @@ int hay_overflow(char **argv)
 			return 1;
 		i++;
 	}
+	return 0;
 }
 
 int check_all_errors(char **argv)

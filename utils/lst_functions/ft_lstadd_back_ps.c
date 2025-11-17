@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back_ps.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 08:16:46 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/15 17:34:00 by mai              ###   ########.fr       */
+/*   Updated: 2025/11/17 14:19:05 by bbouarab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+
+#include "../../include/push_swap.h"
 
 void	ft_lstadd_back_ps(f_list ***lst, f_list *new)
 {
