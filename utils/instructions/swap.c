@@ -15,13 +15,13 @@ void sa(f_list **head, int i)
 	(*head)->next = temp;
 	temp->previous = (*head);
 	temp->next = third;
-	temp->next->previous = temp;
+	if (third)
+		temp->next->previous = temp;
 	//temp->next->previous = NULL;
 	//temp->next = *head;
 	if (i == 1)
 		write(1, "sa\n", 3);
 }
-
 
 void sb(f_list **head, int i)
 {
@@ -38,9 +38,9 @@ void sb(f_list **head, int i)
 	(*head)->next = temp;
 	temp->previous = (*head);
 	temp->next = third;
-	temp->next->previous = temp;
-	//temp->next->previous = NULL;
-	//temp->next = *head;
+	if (third)
+		temp->next->previous = temp;
+
 	if (i == 1)
 		write(1, "sb\n", 3);
 }

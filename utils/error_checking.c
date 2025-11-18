@@ -67,6 +67,21 @@ int hay_overflow(char **argv)
 	return 0;
 }
 
+int check_sorted(f_list *head, char **argv)
+{
+	int *temp_sorted = bubble_sort(argv);
+	int i = 0;
+
+	while ((head))
+	{
+		if ((head)->nbr != temp_sorted[i])
+			return 0;
+		head = (head)->next;
+		i++;
+	}
+	return 1;
+}
+
 int check_all_errors(char **argv)
 {
 	if (!is_valid(argv) || /*check_doublon(argv) ||*/ hay_overflow(argv))

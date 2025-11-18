@@ -2,17 +2,20 @@
 
 void reverse_rotate(f_list **head, char c)
 {
-	f_list *temp;
-	f_list *head_copy;
+	f_list *last;
+	f_list *new_last;
+	f_list *before_last;
 
-	head_copy = *head;
-	temp = *head;
-	while (temp->next)
-		temp = temp->next;
-	temp->next = head_copy;
-	temp->previous->next = NULL;
-	temp->previous = NULL;
-	*head = temp;
+	last = ft_lstlast(*head);
+	last->next = *head;
+
+	before_last = last->previous;
+	before_last->next = NULL;
+
+	last->previous = NULL;
+	(*head)->previous = last;
+	*head = last;
+
 	if (c == 'a')
 		write(1, "rra\n", 4);
 	if (c == 'b')

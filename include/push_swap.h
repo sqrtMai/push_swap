@@ -32,6 +32,7 @@ int error_print(void);
 int str_len(char **argv);
 int *bubble_sort(char **argv);
 int	is_valid(char **argv);
+int check_sorted(f_list *head, char **argv);
 int check_doublon(char **argv);
 int hay_overflow(char **argv);
 int check_all_errors(char **argv);

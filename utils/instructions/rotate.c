@@ -3,18 +3,16 @@
 void rotate(f_list **head, char c)
 {
 	f_list *temp;
+	f_list *last;
 	f_list *head_copy;
 
-	head_copy = *head;
-	temp = *head;
-
-	while (temp->next)
-		temp = temp->next;
-
-	*head = temp;
-	temp->previous->next = NULL;
-	temp->previous = NULL;
-	temp->next = head_copy;
+	head_copy = (*head);
+	last = ft_lstlast(*head);
+	*head = (*head)->next;
+	(*head)->previous = NULL;
+	last->next = head_copy;
+	head_copy->previous = last;
+	head_copy->next = NULL;
 
 	if (c == 'a')
 		write(1, "ra\n", 3);
