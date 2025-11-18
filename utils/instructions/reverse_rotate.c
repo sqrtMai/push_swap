@@ -15,6 +15,7 @@ void reverse_rotate(f_list **head, char c)
 	last->previous = NULL;
 	(*head)->previous = last;
 	*head = last;
+	current_index(*head);
 
 	if (c == 'a')
 		write(1, "rra\n", 4);

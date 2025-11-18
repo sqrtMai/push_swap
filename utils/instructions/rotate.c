@@ -13,7 +13,7 @@ void rotate(f_list **head, char c)
 	last->next = head_copy;
 	head_copy->previous = last;
 	head_copy->next = NULL;
-
+	current_index(*head);
 	if (c == 'a')
 		write(1, "ra\n", 3);
 	if (c == 'b')

@@ -43,9 +43,12 @@ long long ft_atol(char *str);
 
 void	ft_lstadd_front(f_list **lst, f_list *new);
 void	ft_lstadd_back_ps(f_list ***lst, f_list *new);
-void push_swap (f_list **a, f_list **b);
 void init_stacks(f_list **a, char **argv);
 
+
+
+
+void push_swap (f_list **a, f_list **b, char **argv);
 
 //		SWAP ACTIONS
 //PUSH

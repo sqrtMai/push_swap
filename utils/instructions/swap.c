@@ -17,6 +17,7 @@ void sa(f_list **head, int i)
 	temp->next = third;
 	if (third)
 		temp->next->previous = temp;
+	current_index(*head);
 	//temp->next->previous = NULL;
 	//temp->next = *head;
 	if (i == 1)
@@ -40,6 +41,7 @@ void sb(f_list **head, int i)
 	temp->next = third;
 	if (third)
 		temp->next->previous = temp;
+	current_index(*head);
 
 	if (i == 1)
 		write(1, "sb\n", 3);

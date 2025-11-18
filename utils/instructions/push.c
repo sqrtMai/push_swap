@@ -16,6 +16,8 @@ void pa(f_list **a, f_list **b)
 		if (*a)
 			(*a)->previous = copy;
 		*a = copy;
+		current_index(*a);
+		current_index(*b);
 	}
 
 	write(1, "pa\n", 3);
@@ -39,6 +41,8 @@ void pb(f_list **a, f_list **b)
 			(*b)->previous = copy;
 		*b = copy;
 	}
+	current_index(*a);
+	current_index(*b);
 
 	write(1, "pb\n", 3);
 }
