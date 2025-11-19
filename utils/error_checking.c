@@ -36,7 +36,7 @@ int check_doublon(char **argv)
 	int i;
 	int j;
 
-	i = 1;
+	i = 0;
 	while(argv[i])
 	{
 		j = i + 1;
@@ -72,9 +72,9 @@ int check_sorted(f_list *head, char **argv)
 	int *temp_sorted = bubble_sort(argv);
 	int i = 0;
 
-	while (head)
+	while (head->next)
 	{
-		if ((head)->nbr < (head)->next->nbr)
+		if ((head)->nbr > (head)->next->nbr)
 			return 0;
 		head = (head)->next;
 		i++;
@@ -84,7 +84,7 @@ int check_sorted(f_list *head, char **argv)
 
 int check_all_errors(char **argv)
 {
-	if (!is_valid(argv) || /*check_doublon(argv) ||*/ hay_overflow(argv))
+	if (!is_valid(argv) || /* check_doublon(argv) || */ hay_overflow(argv))
 		return (0);
 	return 1;
 
