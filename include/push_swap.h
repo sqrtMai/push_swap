@@ -17,6 +17,7 @@ typedef struct l_list
 	int push_cost;
 	bool above_median;
 	bool cheapest;
+	struct l_list *target_node;
 	struct l_list *next;
 	struct l_list *previous;
 }	f_list;
@@ -24,8 +25,8 @@ typedef struct l_list
 
 f_list	*ft_lstnew_ps(int content, int *temp_sorted, int size);
 f_list	*ft_lstlast(f_list *lst);
-f_list *find_min(f_list *lst, char **argv);
-f_list *find_max(f_list *lst, char **argv);
+f_list *find_min(f_list **stack);
+f_list *find_max(f_list **stack);
 
 int	ft_lstsize(f_list *lst);
 int error_print(void);
@@ -43,8 +44,10 @@ long long ft_atol(char *str);
 
 void	ft_lstadd_front(f_list **lst, f_list *new);
 void	ft_lstadd_back_ps(f_list ***lst, f_list *new);
-void init_stacks(f_list **a, char **argv);
+void	init_stacks(f_list **a, char **argv);
 
+
+bool *is_max(f_list **a, f_list *b);
 
 
 

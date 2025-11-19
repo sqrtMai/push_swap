@@ -11,6 +11,119 @@ void tiny_sort(f_list **a, char **argv)
 		sa(a, 1);
 }
 
+f_list *smallest_bigger(f_list **a, f_list *b)
+{
+	long difference;
+	f_list *temp = *a;
+	f_list *smallest_bigger;
+
+	smallest_bigger = *a;
+	difference = temp->nbr - b->nbr;
+	while (temp)
+	{
+		/* en gros tu soustrais a avec b, déjà faut que le nombre soit positif (sinon ça voudrait dire qu'il est plus petit)
+		une fois que t'as trouvé un nombre plus grand, tu l'attribues dans difference puis à chaque fois t'essayes
+		de trouver un nombre qui a une plus petit difference*/
+
+		if ((temp->nbr - b->nbr > 0)
+		&& (temp->nbr - b->nbr < difference)) //TODO FAIRE GAFFE A L'OVERFLOW LORSQUE TU SOUSTRAITS DEUX TRES PETITS NOMBRES
+		{
+			difference = temp->nbr - b->nbr;
+			smallest_bigger = temp;
+		}
+		temp = temp->next;
+	}
+	return smallest_bigger;
+}
+
+void attribute_targets(f_list **a, f_list **b)
+{
+	f_list *b_head;
+	f_list *a_head;
+
+	b_head = *b;
+	a_head = *a;
+	while (*b)
+	{
+		if (is_max(a, *b))
+			(*b)->target_node = find_min(a);
+		else
+			(*b)->target_node = smallest_bigger(a, *b);
+		/* en gros tu prends le nombre actuel de b
+		et tu le compares avec CHAQUE nombre de A
+		et tu l'attribues à celui qui à la plus petit difference*/
+	}
+	*b = b_head;
+}
+
+void find_cheapest(f_list **b)
+{
+	f_list *actual_cheapest;
+	f_list *temp;
+	int price;
+
+	price = temp->push_cost + temp->target_node->push_cost;
+	actual_cheapest = temp;
+	temp = *b;
+	while (temp)
+	{
+		if ((temp->push_cost + temp->target_node->push_cost) < actual_cheapest)
+		{
+			price = temp->push_cost + temp->target_node->push_cost;
+			actual_cheapest = temp;
+			if (price == 0)
+			{
+				actual_cheapest->cheapest = true;
+				return ;
+			}
+		}
+		temp = temp->next;
+	}
+	actual_cheapest->cheapest = true;
+}
+
+void attribute_push_cost(f_list **a, f_list **b)
+{
+	int len_b;
+	int len_a;
+	f_list *temp;
+		// Mais avant ça je dois attribuer un push price
+	// (somme de b->current position + TN->current_pos)
+	// Si avant médiane : le price est juste la position
+	// si après : len - position
+	// if (median== true)
+	//		price_b = len - position
+
+	len_a = ft_lstsize(a);
+	len_b = ft_lstsize(b);
+	temp = *b;
+	while (temp)
+	{
+		if (temp->above_median)
+			temp->push_cost = len_b - temp->index;
+		else
+			temp->push_cost = temp->index;
+
+		if (temp->target_node->above_median)
+			temp->target_node->push_cost = len_a - temp->target_node->index;
+		else
+			temp->target_node->push_cost = temp->target_node->index;
+
+		temp = temp->next;
+	}
+}
+
+void bring_cheapest_at_top(f_list **a, f_list **b)
+{
+	/*en gros si c'est dans les deux premiers tu swap, et tout le reste tu dois r ou rr * le push cost
+	rr si c'est en dessous de la mediane, r si au dessus*/
+
+	/*faut faire gaffe aussi à si les deux sont possibles en un seul move au lieu de faire les des séprament*/
+	/*if push cost = 1 && au dessus mediane
+		sa
+		*/
+}
+
 void push_swap(f_list **a, f_list **b, char **argv)
 {
 	int len_a;
@@ -22,6 +135,38 @@ void push_swap(f_list **a, f_list **b, char **argv)
 		len_a--;
 	}
 	tiny_sort(a, argv);
+	attribute_targets(a, b);
+	attribute_push_cost(a, b);
+	find_cheapest(b);
+	bring_cheapest_at_top(a, b);
+				// NEXT STEP
+				// FAire en sorte que les nodes B aient une target node d'une node en A
+				// (C'est à dire le closest bigger)
+	//DONE		// Si le node en B est plus grand que n'importe quoi dans la stack A
+				// tu lui attribues le plus petit dans la stack A
+				// attribute_targets(f_list **a, f_list **b);
+
+
+
+	// NEXT STEP
+	// Trouver le cheapest node à déplacer
+	// Mais avant ça je dois attribuer un push price
+	// (somme de b->current position + TN->current_pos)
+	// Si avant médiane : le price est juste la position
+	// si après : len - position
+	// if (median== true)
+	//		price_b = len - position
+	// et en gros tu dois trouver la combinaison
+	// a cost + b cost la cheapest
+	// (si c'est 0 tu push instant)
+	// maitenant que t'as trouvé le cheapest
+	// tu ramènes les deux tout en haut de leur stack
+	// selon leur position tu dois savoir quel move faire
+	// puis une fois que c'est tout en haut
+	// tu PA(b);
+	// et tu refresh tout
+
+
 }
 
 int main(int argc, char **argv)

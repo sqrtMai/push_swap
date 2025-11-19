@@ -6,7 +6,7 @@
 /*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 08:23:46 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/17 14:19:28 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/19 10:47:31 by bbouarab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ f_list	*ft_lstnew_ps(int content, int *temp_sorted, int size)
 	new_list->above_median = NULL;
 	new_list->cheapest = NULL;
 
+	new_list->target_node = NULL;
 	new_list->next = NULL;
 	new_list->previous = NULL;
 
