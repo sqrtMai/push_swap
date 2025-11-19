@@ -20,7 +20,7 @@ f_list *find_min(f_list **stack)
 	return current_min;
 }
 
-bool *is_max(f_list **a, f_list *b)
+int is_max(f_list **a, f_list *b)
 {
 	/*en gros là tu dois comparer le node actuel de B avec TOUS les nodes de A
 	et return si le node si jamais c'est le plus grand */
@@ -34,8 +34,8 @@ bool *is_max(f_list **a, f_list *b)
 	while (temp)
 	{
 		if (temp->nbr > b->nbr)
-			return false;
+			return 0;
 		temp = temp->next;
 	}
-	return true;
+	return 1;
 }

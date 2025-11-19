@@ -47,7 +47,7 @@ void	ft_lstadd_back_ps(f_list ***lst, f_list *new);
 void	init_stacks(f_list **a, char **argv);
 
 
-bool *is_max(f_list **a, f_list *b);
+int is_max(f_list **a, f_list *b);
 
 
 
