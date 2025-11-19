@@ -72,9 +72,9 @@ int check_sorted(f_list *head, char **argv)
 	int *temp_sorted = bubble_sort(argv);
 	int i = 0;
 
-	while ((head))
+	while (head)
 	{
-		if ((head)->nbr != temp_sorted[i])
+		if ((head)->nbr < (head)->next->nbr)
 			return 0;
 		head = (head)->next;
 		i++;

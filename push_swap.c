@@ -164,11 +164,11 @@ void attribute_push_cost(f_list **a, f_list **b)
 			temp->push_cost = len_b - temp->index;
 		else
 			temp->push_cost = temp->index;
-
 		if (temp->target_node->above_median == false)
 			temp->target_node->push_cost = len_a - temp->target_node->index;
 		else
 			temp->target_node->push_cost = temp->target_node->index;
+		write(1, "ok?\n", 4);
 
 		temp = temp->next;
 	}
@@ -186,12 +186,13 @@ void push_swap(f_list **a, f_list **b, char **argv)
 		pb(a, b);
 		len_a--;
 	}
-	tiny_sort(a, argv);
-	write(1, "tiny sort passed", 16);
+	if (!check_sorted(*a, argv))
+		tiny_sort(a, argv);
+	write(1, "tiny sort passed\n", 17);
 	attribute_targets(a, b);
-	write(1, "attribute target passed", 23);
+	write(1, "attribute target passed\n", 24);
 	attribute_push_cost(a, b);
-	write(1, "attribute cost-- passed", 23);
+	write(1, "attribute cost-- passed\n", 24);
 	find_cheapest(a, b);
 	pa(a, b);
 	write(1, "gg", 2);
