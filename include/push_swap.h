@@ -23,10 +23,10 @@ typedef struct l_list
 }	f_list;
 
 
-f_list	*ft_lstnew_ps(int content, int *temp_sorted, int size);
+f_list	*ft_lstnew_ps(int content);
 f_list	*ft_lstlast(f_list *lst);
-f_list *find_min(f_list **stack);
-f_list *find_max(f_list **stack);
+f_list *find_min(f_list *stack);
+f_list *find_max(f_list *stack);
 
 int	ft_lstsize(f_list *lst);
 int error_print(void);
@@ -34,7 +34,7 @@ int str_len(char **argv);
 int *bubble_sort(char **argv);
 int	is_valid(char **argv);
 int check_sorted(f_list *head, char **argv);
-int check_doublon(char **argv);
+int check_doublon(f_list *a);
 int hay_overflow(char **argv);
 int check_all_errors(char **argv);
 int find_index(int content, int *temp_sorted, int size);
@@ -47,7 +47,7 @@ void	ft_lstadd_back_ps(f_list ***lst, f_list *new);
 void	init_stacks(f_list **a, char **argv);
 
 
-int is_max(f_list **a, f_list *b);
+int is_max(f_list *a, f_list *b);
 
 
 

@@ -6,13 +6,13 @@
 /*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 08:23:46 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/19 10:47:31 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/20 09:43:01 by bbouarab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-f_list	*ft_lstnew_ps(int content, int *temp_sorted, int size)
+f_list	*ft_lstnew_ps(int content)
 {
 	f_list	*new_list;
 

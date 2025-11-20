@@ -31,25 +31,44 @@ int	is_valid(char **argv)
 	return (1);
 }
 
-int check_doublon(char **argv)
-{
-	int i;
-	int j;
 
-	i = 1;
-	while(argv[i])
+int check_doublon(f_list *a)
+{
+	f_list *temp;
+
+	while (a)
 	{
-		j = i + 1;
-		while (argv[j])
+		temp = a->next;
+		while (temp)
 		{
-			if (ft_atol(argv[i]) == ft_atol(argv[i + j]))
+			if (a->nbr == temp->nbr)
 				return 1;
-			j++;
+			temp = temp->next;
 		}
-		i++;
+		a = a->next;
 	}
 	return 0;
 }
+
+// int check_doublon(char **argv)
+// {
+// 	int i;
+// 	int j;
+
+// 	i = 1;
+// 	while(argv[i])
+// 	{
+// 		j = i + 1;
+// 		while (argv[j])
+// 		{
+// 			if (ft_atol(argv[i]) == ft_atol(argv[i + j]))
+// 				return 1;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return 0;
+
 
 int hay_overflow(char **argv)
 {
@@ -69,12 +88,12 @@ int hay_overflow(char **argv)
 
 int check_sorted(f_list *head, char **argv)
 {
-	int *temp_sorted = bubble_sort(argv);
+	//int *temp_sorted = bubble_sort(argv);
 	int i = 0;
 
-	while (head)
+	while (head->next)
 	{
-		if ((head)->nbr < (head)->next->nbr)
+		if ((head)->nbr > (head)->next->nbr)
 			return 0;
 		head = (head)->next;
 		i++;

@@ -25,14 +25,14 @@ void current_index(f_list *stack)
 static void init_stack_a(char **argv, f_list **head)
 {
 	size_t i;
-	int size;
+	//int size;
 
 	i = 1;
-	size = str_len(argv);
-	int *temp_sorted = bubble_sort(argv);
+	//size = str_len(argv);
+	//int *temp_sorted = bubble_sort(argv);
 	while (argv[i])
 	{
-		ft_lstadd_back_ps(&head, ft_lstnew_ps((int)ft_atol(argv[i]), temp_sorted, size));
+		ft_lstadd_back_ps(&head, ft_lstnew_ps((int)ft_atol(argv[i])));
 		i++;
 	}
 }

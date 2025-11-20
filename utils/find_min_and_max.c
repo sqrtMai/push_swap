@@ -1,16 +1,17 @@
 #include "../include/push_swap.h"
 
-f_list *find_min(f_list **stack)
+f_list *find_min(f_list *stack)
 {
 	int		i;
 	f_list *temp;
 	f_list *current_min;
 
-	temp = *stack;
+	temp = stack;
 	i = temp->nbr;
+	current_min = temp;
 	while (temp)
 	{
-		if (temp->nbr < i)
+		if (temp->nbr < i) //temp = 0, i = 1
 		{
 			i = temp->nbr;
 			current_min = temp;
@@ -20,7 +21,7 @@ f_list *find_min(f_list **stack)
 	return current_min;
 }
 
-int is_max(f_list **a, f_list *b)
+int is_max(f_list *a, f_list *b)
 {
 	/*en gros là tu dois comparer le node actuel de B avec TOUS les nodes de A
 	et return si le node si jamais c'est le plus grand */
@@ -29,7 +30,7 @@ int is_max(f_list **a, f_list *b)
 	f_list *current_max;
 
 	current_max = NULL;
-	temp = *a;
+	temp = a;
 	i = temp->nbr;
 	while (temp)
 	{
