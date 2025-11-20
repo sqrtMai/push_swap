@@ -32,16 +32,11 @@ int	is_valid(char **argv)
 }
 
 
-<<<<<<< HEAD
 int check_doublon(f_list *a)
 {
 	f_list *temp;
 
 	while (a)
-=======
-	i = 0;
-	while(argv[i])
->>>>>>> d2cd73e89ce76415bc719bea86dee2c6a624c021
 	{
 		temp = a->next;
 		while (temp)

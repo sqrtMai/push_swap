@@ -1,5 +1,26 @@
 #include "../include/push_swap.h"
 
+f_list *find_max(f_list *stack)
+{
+	int		i;
+	f_list *temp;
+	f_list *current_max;
+
+	temp = stack;
+	i = temp->nbr;
+	current_max = temp;
+	while (temp)
+	{
+		if (temp->nbr > i) //temp = 0, i = 1
+		{
+			i = temp->nbr;
+			current_max = temp;
+		}
+		temp = temp->next;
+	}
+	return current_max;
+}
+
 f_list *find_min(f_list *stack)
 {
 	int		i;

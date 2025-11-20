@@ -6,23 +6,23 @@ void current_index(f_list *stack)
 	int median;
 
 	i = 0;
-	if (!stack)
+	if (!(stack))
 		return ;
-	median = ft_lstsize(stack) / 2;
-	while (stack)
+	median = ft_lstsize((stack)) / 2;
+	while ((stack))
 	{
-		stack->index = i;
-		if (i <= median)
-			stack->above_median = true;
+		(stack)->index = i;
+		if (i <= (median))
+			(stack)->above_median = true;
 		else
-			stack->above_median = false;
-		stack = stack->next;
+			(stack)->above_median = false;
+		(stack) = (stack)->next;
 		i++;
 	}
 }
 
 
-static void init_stack_a(char **argv, f_list **head)
+static void init_stack_a(int argc, char **argv, f_list **head)
 {
 	size_t i;
 	//int size;
@@ -32,13 +32,13 @@ static void init_stack_a(char **argv, f_list **head)
 	//int *temp_sorted = bubble_sort(argv);
 	while (argv[i])
 	{
-		ft_lstadd_back_ps(&head, ft_lstnew_ps((int)ft_atol(argv[i])));
+		ft_lstadd_back_ps(head, ft_lstnew_ps((int)ft_atol(argv[i])));
 		i++;
 	}
 }
 
-void init_stacks(f_list **a, char **argv)
+void init_stacks(f_list **a, int argc, char **argv)
 {
-	init_stack_a(argv, a);
+	init_stack_a(argc, argv, a);
 	current_index(*a);
 }
