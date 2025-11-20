@@ -302,6 +302,7 @@ int main(int argc, char **argv)
 		else
 			push_swap(stack_a, stack_b, argv);
 	}
+<<<<<<< HEAD
 	printf("\n%d - ", head_a->nbr);
 	printf("%d - ", head_a->next->nbr);
 	printf("%d - ", head_a->next->next->nbr);
@@ -309,5 +310,13 @@ int main(int argc, char **argv)
 	printf("%d - ", head_a->next->next->next->next->nbr);
 	printf("%d - ", head_a->next->next->next->next->next->nbr);
 	printf("%d", head_a->next->next->next->next->next->next->nbr);
+=======
+	//printf("\n%d - ", head_a->nbr);
+	//printf("%d - ", head_a->next->nbr);
+	//printf("%d - ", head_a->next->next->nbr);
+	//printf("%d - ", head_a->next->next->next->nbr);
+	//printf("%d", head_a->next->next->next->next->nbr);
+
+>>>>>>> d2cd73e89ce76415bc719bea86dee2c6a624c021
 	return 0;
 }
