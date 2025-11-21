@@ -2,39 +2,73 @@
 
 void tiny_sort(f_list **a)
 {
-	write(1, "tu rentres dans le sort\n", 25);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, 1);
-	if (!check_sorted(*a))
+	f_list *biggest;
+
+	biggest = find_max(*a);
+	if ((*a) == biggest)
+		rotate(a, 'a');
+	else if ((*a)->next == biggest)
 		reverse_rotate(a, 'a');
-	if (!check_sorted(*a))
+	if ((*a)->nbr > (*a)->next->nbr)
 		sa(a, 1);
 }
 
 void bring_cheapest_at_top(f_list **cheapest, f_list **a, f_list **b)
 {
-
-	//TODO A OPTIMISER
-	if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == true && (*cheapest)->above_median == true)))
-		rrr(a, b);
-	else if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == false && (*cheapest)->above_median == false)))
-		rr(a, b);
-	if ((*cheapest)->target_node == (*a)->next)
-		rotate(a, 1);
-	if ((*cheapest) == (*b)->next)
-		rotate(b, 1);
-	while (*a != (*cheapest)->target_node || *b != (*cheapest))
+	//write(1, "pa\n", 3);
+	if ((*cheapest)->target_node->above_median == true && (*cheapest)->above_median == true)
 	{
-		if ((*cheapest)->target_node->above_median == false && *a != (*cheapest)->target_node)
+		while (*a != (*cheapest)->target_node && *b != (*cheapest))
+			rr(a, b);
+	}
+
+	if ((*cheapest)->target_node->above_median == false && (*cheapest)->above_median == false)
+	{
+		while (*a != (*cheapest)->target_node && *b != (*cheapest))
+			rrr(a, b);
+	}
+	while (*a != (*cheapest)->target_node)
+	{
+		if ((*cheapest)->target_node->above_median == false)
 			reverse_rotate(a, 'a');
-		if ((*cheapest)->target_node->above_median == true && *a != (*cheapest)->target_node)
+		else
 			rotate(a, 'a');
-		if ((*cheapest)->above_median == false && *b != (*cheapest))
+	}
+	while (*b != (*cheapest))
+	{
+		if ((*cheapest)->above_median == false)
 			reverse_rotate(b, 'b');
-		if ((*cheapest)->above_median == true && *b != (*cheapest))
+		else
 			rotate(b, 'b');
 	}
 }
+
+
+
+// void bring_cheapest_at_top(f_list **cheapest, f_list **a, f_list **b)
+// {
+// 	//TODO A OPTIMISER
+// 	if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == true && (*cheapest)->above_median == true)))
+// 		rr(a, b);
+// 	else if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == false && (*cheapest)->above_median == false)))
+// 		rrr(a, b);
+// 	if ((*cheapest)->target_node == (*a)->next)
+// 		rotate(a, 'a');
+// 	if ((*cheapest) == (*b)->next)
+// 		rotate(b, 'b');
+// 	while (*a != (*cheapest)->target_node || *b != (*cheapest))
+// 	{
+// 		if ((*cheapest)->target_node->above_median == false && *a != (*cheapest)->target_node)
+// 			reverse_rotate(a, 'a');
+// 		if ((*cheapest)->target_node->above_median == true && *a != (*cheapest)->target_node)
+// 			rotate(a, 'a');
+// 		if ((*cheapest)->above_median == false && *b != (*cheapest))
+// 			reverse_rotate(b, 'b');
+// 		if ((*cheapest)->above_median == true && *b != (*cheapest))
+// 			rotate(b, 'b');
+// 	}
+// }
+
 void find_cheapest(f_list **a, f_list **b)
 {
 	f_list *actual_cheapest;
@@ -43,7 +77,7 @@ void find_cheapest(f_list **a, f_list **b)
 
 	temp = *b;
 	actual_cheapest = temp;
-	price = temp->push_cost;
+	price = INT_MAX;
 	while (temp)
 	{
 		if ((temp->push_cost) < price)
@@ -129,11 +163,12 @@ void attribute_push_cost(f_list **a, f_list **b)
 	{
 		temp->push_cost = temp->index;
 		if (temp->above_median == false)
-			temp->push_cost = temp->index - len_b;
+			temp->push_cost = len_b - temp->index;
+
 		if (temp->target_node->above_median == false)
-			temp->push_cost += temp->target_node->index;
-		else
 			temp->push_cost += len_a - temp->target_node->index;
+		else
+			temp->push_cost += temp->target_node->index;
 		temp = temp->next;
 	}
 }
@@ -178,6 +213,18 @@ void finish_sort(f_list **stack)
 			reverse_rotate(stack, 'a');
 	}
 }
+void reset_nodes(f_list **stacks)
+{
+	f_list *temp;
+
+	temp = *stacks;
+	while (temp)
+	{
+		temp->push_cost = 0;
+		temp->cheapest = 0;
+		temp = temp->next;
+	}
+}
 
 void push_swap(f_list **a, f_list **b)
 {
@@ -206,17 +253,18 @@ void push_swap(f_list **a, f_list **b)
 		attribute_push_cost(a, b);
 		find_cheapest(a, b);
 		pa(a, b);
-		printf("\n");
+		// reset_nodes(a);
+		// reset_nodes(b);
 		len_b--;
 	}
 	finish_sort(a);
-	temp = *a;
-	// printf("%d est-il above mediane : %d\n", temp->next->next->nbr, temp->next->next->above_median);
-	while (temp)
-	{
-		printf("%d - ", temp->nbr);
-		temp = temp->next;
-	}
+// 	temp = *a;
+// 	printf("%d est-il above mediane : %d\n", temp->next->next->nbr, temp->next->next->above_median);
+// 	while (temp)
+// 	{
+// 		printf("%d - ", temp->nbr);
+// 		temp = temp->next;
+// 	}
 }
 int main(int argc, char **argv)
 {
@@ -227,8 +275,8 @@ int main(int argc, char **argv)
 	f_list **stack_a = &head_a;
 	f_list **stack_b = &head_b;
 
-	if (argc == 2)
-		return (1);
+	if (argc <= 2)
+		return (0);
 
 	if (!(check_all_errors(argv)))
 		return error_print();
