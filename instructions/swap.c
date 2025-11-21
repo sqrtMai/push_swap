@@ -1,4 +1,4 @@
-#include "../../include/push_swap.h"
+#include "../include/push_swap.h"
 
 void sa(f_list **head, int i)
 {

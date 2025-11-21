@@ -3,35 +3,13 @@
 void tiny_sort(f_list **a, char **argv)
 {
 	write(1, "tu rentres dans le sort\n", 25);
-	if ((*a)->nbr > (*a)->next->nbr) // if not sorted: if a > b : sa
+	if ((*a)->nbr > (*a)->next->nbr)
 		sa(a, 1);
 	if (!check_sorted(*a, argv))
 		reverse_rotate(a, 'a');
 	if (!check_sorted(*a, argv))
 		sa(a, 1);
 }
-
-/*en gros si c'est dans les deux pre		if (temp->target_node->above_median == false)
-			temp->target_node->push_cost = len_a - temp->target_node->index;
-		else
-			temp->target_node->push_cost = temp->target_node->index;miers tu swap, et tout le reste tu dois r ou rr * le push cost
-rr si c'est en dessous de la mediane, r si au dessus*/
-
-/*faut faire gaffe aussi à si les deux sont possibles en un seul move au lieu de faire les des séprament*/
-/*if push cost = 1 pour les deux && au dessus mediane pour les deux
-	ss
-	*/
-/*if push cost = 1 pour les deux && en dessous mediane pour les deux
-	rrr
-	*/
-
-// if ((((*cheapest)->push_cost == 1) && ((*cheapest)->target_node->push_cost == 1))
-// 	&& (((*cheapest)->above_median) && ((*cheapest)->target_node->above_median)))
-// 	return (ss(&(*cheapest)->previous, &(*cheapest)->target_node->previous));
-
-// if ((((*cheapest)->push_cost == 1) && ((*cheapest)->target_node->push_cost == 1))
-// 	&& (((*cheapest)->above_median = false) && ((*cheapest)->target_node->above_median = false)))
-// 	return(rrr(&(*cheapest)->previous, &(*cheapest)->target_node->previous));
 
 void superior_to_one(f_list **cheapest, f_list **head, int push_cost, char stack)
 {
@@ -50,9 +28,7 @@ void superior_to_one(f_list **cheapest, f_list **head, int push_cost, char stack
 void bring_cheapest_at_top(f_list **cheapest, f_list **a, f_list **b)
 {
 
-	// printf("*a = %d (%d)\n", (*a)->nbr, (*cheapest)->target_node->nbr);
-	// printf("*b = %d (%d)\n", (*b)->nbr, (*cheapest)->nbr);
-
+	//TODO A OPTIMISER
 	if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == true && (*cheapest)->above_median == true)))
 		rrr(a, b);
 	else if ((*cheapest)->push_cost == 2 && (*a != (*cheapest)->target_node && *b != (*cheapest) && ((*cheapest)->target_node->above_median == false && (*cheapest)->above_median == false)))
@@ -72,8 +48,6 @@ void bring_cheapest_at_top(f_list **cheapest, f_list **a, f_list **b)
 		if ((*cheapest)->above_median == true && *b != (*cheapest))
 			rotate(b, 'b');
 	}
-	// printf("*a = %d\n", (*a)->nbr);
-	// printf("*b = %d\n", (*b)->nbr);
 }
 void find_cheapest(f_list **a, f_list **b)
 {
@@ -84,7 +58,6 @@ void find_cheapest(f_list **a, f_list **b)
 	temp = *b;
 	actual_cheapest = temp;
 	price = temp->push_cost;
-	// write(1, "passe", 5);
 	while (temp)
 	{
 		if ((temp->push_cost) < price)
@@ -101,7 +74,6 @@ void find_cheapest(f_list **a, f_list **b)
 		temp = temp->next;
 	}
 	actual_cheapest->cheapest = true;
-
 	bring_cheapest_at_top(&actual_cheapest, a, b);
 }
 
@@ -116,10 +88,6 @@ f_list *closest_smaller(f_list *a, f_list *b)
 
 	while (temp)
 	{
-		/* en gros tu soustrais a avec b, déjà faut que le nombre soit positif (sinon ça voudrait dire qu'il est plus petit)
-		une fois que t'as trouvé un nombre plus grand, tu l'attribues dans difference puis à chaque fois t'essayes
-		de trouver un nombre qui a une plus petit difference*/
-
 		if ((temp->nbr - a->nbr < 0) && (temp->nbr - a->nbr > difference)) // TODO FAIRE GAFFE A L'OVERFLOW LORSQUE TU SOUSTRAITS DEUX TRES PETITS NOMBRES
 		{
 			difference = a->nbr - temp->nbr;
@@ -211,6 +179,20 @@ void attribute_targets(f_list **a, f_list **b)
 	*b = b_head;
 }
 
+void finish_sort(f_list **stack)
+{
+	if (find_min(*stack)->above_median == true)
+	{
+		while (*stack != find_min(*stack))
+			rotate(stack, 'a');
+	}
+	else
+	{
+		while (*stack != find_min(*stack))
+			reverse_rotate(stack, 'a');
+	}
+}
+
 void push_swap(f_list **a, f_list **b, char **argv)
 {
 	int len_a;
@@ -238,18 +220,18 @@ void push_swap(f_list **a, f_list **b, char **argv)
 		attribute_push_cost(a, b);
 		find_cheapest(a, b);
 		pa(a, b);
-		temp = *a;
-		//printf("%d est-il above mediane : %d\n", temp->next->next->nbr, temp->next->next->above_median);
-		while (temp)
-		{
-			printf("%d - ", temp->nbr);
-			temp = temp->next;
-		}
 		printf("\n");
 		len_b--;
 	}
+	finish_sort(a);
+	temp = *a;
+	// printf("%d est-il above mediane : %d\n", temp->next->next->nbr, temp->next->next->above_median);
+	while (temp)
+	{
+		printf("%d - ", temp->nbr);
+		temp = temp->next;
+	}
 }
-
 int main(int argc, char **argv)
 {
 	f_list *head_a;
@@ -272,20 +254,12 @@ int main(int argc, char **argv)
 
 	if (!check_sorted(head_a, argv))
 	{
-		if (str_len(argv) == 2)
+		if (argc == 3)
 			return (sa(&head_a, 1), 0);
-		else if (str_len(argv) == 3)
+		else if (argc == 4)
 			tiny_sort(stack_a, argv);
 		else
 			push_swap(stack_a, stack_b, argv);
 	}
-	// while (head_a)
-	// {
-	// 	printf("%d - ", head_a->nbr);
-	// 	head_a = head_a->next;
-	// }
-	// printf("%d - ", head_a->next->next->next->next->nbr);
-	// printf("%d - ", head_a->next->next->next->next->next->nbr);
-	// printf("%d", head_a->next->next->next->next->next->next->nbr);
 	return 0;
 }

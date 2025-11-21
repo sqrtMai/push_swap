@@ -103,7 +103,7 @@ int check_sorted(f_list *head, char **argv)
 
 int check_all_errors(char **argv)
 {
-	if (!is_valid(argv) || /* check_doublon(argv) || */ hay_overflow(argv))
+	if (!is_valid(argv) || hay_overflow(argv))
 		return (0);
 	return 1;
 

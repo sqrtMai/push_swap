@@ -1,4 +1,4 @@
-#include "../../include/push_swap.h"
+#include "../include/push_swap.h"
 
 void rotate(f_list **head, char c)
 {
