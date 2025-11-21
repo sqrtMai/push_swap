@@ -3,7 +3,6 @@
 void reverse_rotate(f_list **head, char c)
 {
 	f_list *last;
-	f_list *new_last;
 	f_list *before_last;
 
 	last = ft_lstlast(*head);

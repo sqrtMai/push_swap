@@ -6,7 +6,7 @@
 /*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 09:12:34 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/21 09:17:28 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/21 09:52:38 by bbouarab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void current_index(f_list *stack)
 }
 
 
-static void init_stack_a(int argc, char **argv, f_list **head)
+static void init_stack_a(char **argv, f_list **head)
 {
 	size_t i;
 	//int size;
@@ -49,8 +49,8 @@ static void init_stack_a(int argc, char **argv, f_list **head)
 	}
 }
 
-void init_stacks(f_list **a, int argc, char **argv)
+void init_stacks(f_list **a, char **argv)
 {
-	init_stack_a(argc, argv, a);
+	init_stack_a(argv, a);
 	current_index(*a);
 }

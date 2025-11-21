@@ -2,7 +2,6 @@
 
 void rotate(f_list **head, char c)
 {
-	f_list *temp;
 	f_list *last;
 	f_list *head_copy;
 

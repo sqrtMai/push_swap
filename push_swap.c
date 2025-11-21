@@ -1,28 +1,14 @@
 #include "include/push_swap.h"
 
-void tiny_sort(f_list **a, char **argv)
+void tiny_sort(f_list **a)
 {
 	write(1, "tu rentres dans le sort\n", 25);
 	if ((*a)->nbr > (*a)->next->nbr)
 		sa(a, 1);
-	if (!check_sorted(*a, argv))
+	if (!check_sorted(*a))
 		reverse_rotate(a, 'a');
-	if (!check_sorted(*a, argv))
+	if (!check_sorted(*a))
 		sa(a, 1);
-}
-
-void superior_to_one(f_list **cheapest, f_list **head, int push_cost, char stack)
-{
-	if ((*cheapest)->above_median == true)
-	{
-		while (*head != *cheapest)
-			rotate(head, stack);
-	}
-	if ((*cheapest)->above_median == false)
-	{
-		while (*head != *cheapest)
-			reverse_rotate(head, stack);
-	}
 }
 
 void bring_cheapest_at_top(f_list **cheapest, f_list **a, f_list **b)
@@ -193,7 +179,7 @@ void finish_sort(f_list **stack)
 	}
 }
 
-void push_swap(f_list **a, f_list **b, char **argv)
+void push_swap(f_list **a, f_list **b)
 {
 	int len_a;
 	f_list *temp;
@@ -206,8 +192,8 @@ void push_swap(f_list **a, f_list **b, char **argv)
 		len_a--;
 	}
 	int len_b = ft_lstsize(*b);
-	if (!check_sorted(*a, argv))
-		tiny_sort(a, argv);
+	if (!check_sorted(*a))
+		tiny_sort(a);
 
 	/*push 2 fois de a à B, attribuer un biggest smaller, push cost, puis bouger
 	le cheapest de A à B et ce jusqu'à ce qu'il reste plus que 3 nodes dans a
@@ -247,19 +233,19 @@ int main(int argc, char **argv)
 	if (!(check_all_errors(argv)))
 		return error_print();
 
-	init_stacks(&head_a, argc, argv);
+	init_stacks(&head_a, argv);
 
 	if (check_doublon(head_a))
 		return error_print();
 
-	if (!check_sorted(head_a, argv))
+	if (!check_sorted(head_a))
 	{
 		if (argc == 3)
 			return (sa(&head_a, 1), 0);
 		else if (argc == 4)
-			tiny_sort(stack_a, argv);
+			tiny_sort(stack_a);
 		else
-			push_swap(stack_a, stack_b, argv);
+			push_swap(stack_a, stack_b);
 	}
 	return 0;
 }
