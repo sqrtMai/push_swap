@@ -1,12 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 08:12:36 by bbouarab          #+#    #+#             */
+/*   Updated: 2025/11/22 11:41:56 by mai              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
-void pa(f_list **a, f_list **b)
+void	pa(t_list **a, t_list **b)
 {
-	f_list *copy;
-	f_list *copy_a;
+	t_list	*copy;
 
 	copy = *b;
-	copy_a = *a;
 	if (*b)
 	{
 		*b = (*b)->next;
@@ -19,18 +29,14 @@ void pa(f_list **a, f_list **b)
 		current_index(*a);
 		current_index(*b);
 	}
-
 	write(1, "pa\n", 3);
 }
 
-void pb(f_list **a, f_list **b)
+void	pb(t_list **a, t_list **b)
 {
-	f_list *copy;
-	f_list *copy_b;
+	t_list	*copy;
 
 	copy = *a;
-	copy_b = *b;
-
 	if (*a)
 	{
 		*a = (*a)->next;
@@ -43,6 +49,5 @@ void pb(f_list **a, f_list **b)
 	}
 	current_index(*a);
 	current_index(*b);
-
 	write(1, "pb\n", 3);
 }

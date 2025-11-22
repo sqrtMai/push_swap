@@ -4,14 +4,11 @@ CFLAGS = -Wall -Wextra -Werror -I./includes/
 AR = ar rcs
 RM = rm -f
 
-SRC = push_swap.c \
+SRC = push_swap.c bubble_sort.c \
 		instructions/push.c instructions/reverse_rotate.c instructions/rotate.c instructions/swap.c \
-		utils/error_checking.c utils/ft_atol.c utils/initialize.c utils/min_and_max.c \
+		utils/error_checking.c utils/ft_atol.c utils/initialize.c utils/min_and_max.c utils/algo_utils.c \
 		utils/lst_utils/ft_lstadd_back_ps.c utils/lst_utils/ft_lstadd_front.c utils/lst_utils/ft_lstlast.c utils/lst_utils/ft_lstnew_ps.c utils/lst_utils/ft_lstsize.c
 OBJ = $(SRC:.c=.o)
-
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 

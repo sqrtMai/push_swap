@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 08:12:36 by bbouarab          #+#    #+#             */
+/*   Updated: 2025/11/22 11:42:15 by mai              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
-void rotate(f_list **head, char c)
+void	rotate(t_list **head, char c)
 {
-	f_list *last;
-	f_list *head_copy;
+	t_list	*last;
+	t_list	*head_copy;
 
 	head_copy = (*head);
 	last = ft_lstlast(*head);
@@ -19,7 +31,7 @@ void rotate(f_list **head, char c)
 		write(1, "rb\n", 3);
 }
 
-void rr(f_list **a, f_list **b)
+void	rr(t_list **a, t_list **b)
 {
 	rotate(a, 'c');
 	rotate(b, 'c');

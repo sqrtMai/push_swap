@@ -3,5 +3,6 @@
 		"*.c": "c",
 		"*.h": "c",
 		"random": "c"
-	}
+	},
+	"cmake.ignoreCMakeListsMissing": true
 }

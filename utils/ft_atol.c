@@ -12,7 +12,6 @@
 
 #include "../include/push_swap.h"
 
-
 static int	is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v'

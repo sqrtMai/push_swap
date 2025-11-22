@@ -1,15 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/07 08:12:36 by bbouarab          #+#    #+#             */
+/*   Updated: 2025/11/22 11:42:23 by mai              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 
-void sa(f_list **head, int i)
+void	sa(t_list **head, int i)
 {
-	f_list *head_copy;
-	f_list *temp;
-	f_list *third;
+	t_list	*temp;
+	t_list	*third;
+
 	third = (*head)->next->next;
-
 	temp = *head;
-	head_copy = *head;
-
 	*head = (*head)->next;
 	(*head)->previous = NULL;
 	(*head)->next = temp;
@@ -18,22 +27,17 @@ void sa(f_list **head, int i)
 	if (third)
 		temp->next->previous = temp;
 	current_index(*head);
-	//temp->next->previous = NULL;
-	//temp->next = *head;
 	if (i == 1)
 		write(1, "sa\n", 3);
 }
 
-void sb(f_list **head, int i)
+void	sb(t_list **head, int i)
 {
-	f_list *head_copy;
-	f_list *temp;
-	f_list *third;
+	t_list	*temp;
+	t_list	*third;
+
 	third = (*head)->next->next;
-
 	temp = *head;
-	head_copy = *head;
-
 	*head = (*head)->next;
 	(*head)->previous = NULL;
 	(*head)->next = temp;
@@ -42,13 +46,11 @@ void sb(f_list **head, int i)
 	if (third)
 		temp->next->previous = temp;
 	current_index(*head);
-
 	if (i == 1)
 		write(1, "sb\n", 3);
 }
 
-
-void ss(f_list **a, f_list **b)
+void	ss(t_list **a, t_list **b)
 {
 	sa(a, 0);
 	sb(b, 0);

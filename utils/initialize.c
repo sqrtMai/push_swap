@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 09:12:34 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/21 09:52:38 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:43:17 by mai              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void current_index(f_list *stack)
+void	current_index(t_list *stack)
 {
-	int i;
-	int median;
+	int	i;
+	int	median;
 
 	i = 0;
 	if (!(stack))
@@ -33,15 +33,11 @@ void current_index(f_list *stack)
 	}
 }
 
-
-static void init_stack_a(char **argv, f_list **head)
+static void	init_stack_a(char **argv, t_list **head)
 {
-	size_t i;
-	//int size;
+	size_t	i;
 
 	i = 1;
-	//size = str_len(argv);
-	//int *temp_sorted = bubble_sort(argv);
 	while (argv[i])
 	{
 		ft_lstadd_back_ps(head, ft_lstnew_ps((int)ft_atol(argv[i])));
@@ -49,7 +45,7 @@ static void init_stack_a(char **argv, f_list **head)
 	}
 }
 
-void init_stacks(f_list **a, char **argv)
+void	init_stacks(t_list **a, char **argv)
 {
 	init_stack_a(argv, a);
 	current_index(*a);

@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 08:30:44 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/17 14:19:39 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:42:52 by mai              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/push_swap.h"
 
-int	ft_lstsize(f_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	f_list	*temp;
+	t_list	*temp;
 	int		i;
 
 	if (!lst)

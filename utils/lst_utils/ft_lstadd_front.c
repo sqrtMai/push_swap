@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbouarab <bbouarab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mai <mai@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 08:18:06 by bbouarab          #+#    #+#             */
-/*   Updated: 2025/11/17 14:18:58 by bbouarab         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:42:38 by mai              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	ft_lstadd_front(f_list **lst, f_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-
 	*lst = new;
 }
